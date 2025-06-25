@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ChoiceBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="MediathequeController"> <!-- L'attribut fx:controller spécifie le nom de la classe de contrôleur Java associée à ce fichier FXML, permettant ainsi de lier les éléments de l'interface aux méthodes du contrôleur. -->
+
+    <MenuBar>
+        <menus>
+            
+            <!-- Les attributs visible contrôlent la visibilité des différents éléments de l'interface utilisateur. Cela permet de montrer ou de cacher des parties de l'interface en fonction de l'état de l'application ou des actions de l'utilisateur. -->
+            
+            <Menu fx:id="bibliothecaireMenu" text="Bibliothécaire" visible="true">
+                <items>
+                    <!-- Les attributs onAction spécifient les méthodes à appeler dans le contrôleur Java lorsqu'un événement particulier se produit, par exemple lorsqu'un bouton est cliqué. -->
+                	
+                    <MenuItem text="Se connecter" onAction="#SeConnecterAffichage" fx:id="seConnecterMenuItem" visible="true"/>
+                    <MenuItem text="Gestion Adherents" onAction="#adherent" fx:id="gestionAdherentsMenuItem" visible="false"/>
+                    <MenuItem text="Ajouter un nouvel Ouvrage/Exemplaire" onAction="#GererOuvrage" fx:id="gererOuvrageMenuItem" visible="false"/>
+                    <MenuItem text="Enregistrer/Prolonger/Restituer un emprunt" onAction="#emprunt" fx:id="empruntMenuItem" visible="false"/>
+                    <MenuItem text="Disponibilité d'un ouvrage" onAction="#dispo" fx:id="dispoMenuItem" visible="false"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    
+    <VBox fx:id="interfaceconnexion" visible="false">
+    	<GridPane>
+    		<!--  Les balises <TextField>, <Label>, <Button>, etc., sont utilisées pour déclarer différents éléments de l'interface utilisateur, tels que des champs de texte, des étiquettes et des boutons. -->
+    		
+    		<Label text="Bienvenue" fx:id="message" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+		<Label text="Mot de Passe:" fx:id="MDP" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+		<TextField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+		
+	    
+		<Button text="Se connecter" fx:id="bouton" onAction="#handleLoginButtonAction" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+	    
+    
+        </GridPane>
+    </VBox>
+    
+    <VBox fx:id="interfaceGererAdherent" visible="false">
+        <GridPane>
+            <Label text="Nom :" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="nomT" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            
+            <Label text="Prenom :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="prenomT" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            
+            <Label text="Email :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="emailT" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            
+            <Label text="Date de Naissance :" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <TextField fx:id="dateNaissanceT" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            
+            <Button text="Ajouter un Adhérent" onAction="#InscrireAdherent" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
+            
+            <Separator orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="5" prefWidth="75"/>
+            
+            <Label text="Numéro ID:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+	    <TextField fx:id="IDT1" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+	    
+	    <Button text="Exemplaire en retard " onAction="#EnsembleRetardAdherent" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+	    
+	    <Separator orientation="HORIZONTAL" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+        
+            <Button text="Liste des adherents en retard " onAction="#RecupererMail" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+            
+            <Separator orientation="VERTICAL" GridPane.columnIndex="5" GridPane.rowIndex="0" GridPane.rowSpan="5" prefWidth="75"/>
+            
+            <Label text="Numéro ID:" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+	    <TextField fx:id="IDT2" GridPane.columnIndex="7" GridPane.rowIndex="0"/>
+	    
+	    <Button text="Montant dû" onAction="#MontantDu" GridPane.columnIndex="7" GridPane.rowIndex="1"/>
+            
+            <Label text="Numéro ID:" GridPane.columnIndex="6" GridPane.rowIndex="2"/>
+	    <TextField fx:id="IDT3" GridPane.columnIndex="7" GridPane.rowIndex="2"/>
+            
+	    <Button text="Payer la cotisation" onAction="#Paiement" GridPane.columnIndex="7" GridPane.rowIndex="3"/>
+	    
+	    <Separator orientation="VERTICAL" GridPane.columnIndex="8" GridPane.rowIndex="0" GridPane.rowSpan="5" prefWidth="75"/>
+            
+            <Label text="Numéro ID:" GridPane.columnIndex="9" GridPane.rowIndex="0"/>
+	    <TextField fx:id="IDT4" GridPane.columnIndex="10" GridPane.rowIndex="0"/>
+	    
+	    <Label text="Adresse Mail:" GridPane.columnIndex="9" GridPane.rowIndex="1"/>
+	    <TextField fx:id="emailT1" GridPane.columnIndex="10" GridPane.rowIndex="1"/>
+            
+	    <Button text="Changer l'email" onAction="#ChangerMail" GridPane.columnIndex="9" GridPane.rowIndex="2"/>
+            
+        </GridPane>
+        
+        <!--<Button text="Afficher Liste des Ouvrages" onAction="#afficherListeOuvrages" />-->
+		
+	<Button text="Enregistrer l'adhérent" onAction="#enregistrerAdherentsDansFichier" />
+        
+    </VBox>
+
+    <VBox fx:id="interfaceGererOuvrage" visible="false">
+    	<GridPane>
+        	<Label text="Titre de l'ouvrage:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        	<TextField fx:id="titreT" GridPane.columnIndex="1" GridPane.rowIndex="0"/>	
+
+        	<Label text="Type de l'ouvrage:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        	<ChoiceBox fx:id="typeChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        	
+        	<Separator orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2" prefWidth="100"/>
+
+        	
+        	<Label text="Titre de l'ouvrage:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+		<TextField fx:id="titreT1" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+	    
+    
+		<Button text="Ajouter un ouvrage" onAction="#ajouterOuvrage" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="2"/>
+	    
+	    	<Button text="Ajouter un exemplaire" onAction="#ajouterExemplaire" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="1"/>
+	    
+		<!--<Button text="Afficher Liste des Ouvrages" onAction="#afficherListeOuvrages" />
+		
+		<Button text="Enregistrer l'ouvrage" onAction="#enregistrerouvrage" />-->
+	    
+		<!--<ListView fx:id="ouvrageListView" />-->
+	</GridPane>
+	
+	<Button text="Enregistrer l'ouvrage" onAction="#enregistrerOuvragesDansFichier" />
+    </VBox>
+    
+    <VBox fx:id="interfaceEmprunt" visible="false">
+    	<GridPane>    		
+		<Label text="Numéro ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+		<TextField fx:id="IDT" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+		
+		<Label text="Reference de l'ouvrage:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+		<TextField fx:id="referenceT" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+		
+		<Button text="Enregistrer l'emprunt" onAction="#EnregistrerEmprunt" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+		
+		<Separator orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="3" prefWidth="75"/>
+		
+		<Label text="Reference de l'ouvrage:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+		<TextField fx:id="referenceT1" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+	    
+		<Button text="Prolonger l'emprunt" onAction="#ProlongerEmprunt" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+	    
+		<Separator orientation="VERTICAL" GridPane.columnIndex="5" GridPane.rowIndex="0" GridPane.rowSpan="3" prefWidth="75"/>
+		
+		<Label text="Reference de l'ouvrage:" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+		<TextField fx:id="referenceT2" GridPane.columnIndex="7" GridPane.rowIndex="0"/>
+		
+		<Button text="Restituer l'emprunt" onAction="#RestituerEmprunt" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
+		
+	</GridPane>
+    </VBox>
+    
+    <VBox fx:id="interfaceDisponibilite" visible="false">
+    	<GridPane>
+		<Label text="Titre de l'ouvrage:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+		<TextField fx:id="titreT2" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+		
+		<Button text="Verifier" onAction="#VerifierDisponibilite" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+		
+		<Separator orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="3" prefWidth="100"/>
+		
+		<Label text="Reference de l'ouvrage:" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+		<TextField fx:id="referenceT3" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+		
+		<Button text="Recuperer la date limite" onAction="#RecupererDateLimite" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+	    
+		<!--<Button text="Afficher Liste des Ouvrages" onAction="#afficherListeOuvrages" />
+		
+		<Button text="Enregistrer l'ouvrage" onAction="#enregistrerouvrage" />-->
+    
+        </GridPane>
+    </VBox>
+    
+    
+</VBox>
+
