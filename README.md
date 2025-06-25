@@ -1,4 +1,4 @@
-# La Bibliothèque d’Alexandrie - Projet MIPP (GM3)
+# La Bibliothèque d’Alexandrie
 
 > **Auteurs :** Doubli Hoda & Ait Taleb Assia - INSA Rouen, promo GM3 
 > **Date :** juin 2024  
