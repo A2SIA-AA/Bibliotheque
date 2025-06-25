@@ -87,6 +87,3 @@ java  \
 * [Gluon JavaFX](https://gluonhq.com/products/javafx/) — SDK + tutoriels*
 
 ---
-
-<p align="center">_“Restaurer l’esprit d’Alexandrie, une ligne de code à la fois.”_ 🏛️</p>
-```
