@@ -49,12 +49,11 @@ Une application Java (console **et** JavaFX) qui simule la gestion d’une médi
 # Compilation
 javac \
   --module-path $PATH_TO_FX/lib --add-modules javafx.controls,javafx.fxml \
-  -d out $(find java -name "*.java")
+  NomFichier.java
 
 # Exécution
 java  \
-  --module-path $PATH_TO_FX/lib --add-modules javafx.controls,javafx.fxml \
-  -cp out ui.Launcher      # classe qui étend javafx.application.Application
+java –module-path $PATH_TO_FX/lib –add-modules javafx.fxml,javafx.controls main
 ```
 
 *Remplace* `$PATH_TO_FX` *par le chemin vers le dossier* `javafx-sdk-XX.X.X`.
